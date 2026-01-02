@@ -111,8 +111,8 @@ export default function DashboardPage() {
   // API helper with auth
   const apiCall = async (endpoint: string, options: RequestInit = {}) => {
     const token = localStorage.getItem("adminToken");
-    const headers: HeadersInit = {
-      ...options.headers,
+    const headers: Record<string, string> = {
+      ...(options.headers as Record<string, string>),
     };
 
     if (token) {
