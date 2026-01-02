@@ -19,6 +19,7 @@ export default function LoginPage() {
   useEffect(() => {
     setIsClient(true);
     // Redirect if already authenticated
+    console.log(isAuthenticated());
     if (isAuthenticated()) {
       router.replace("/");
     }

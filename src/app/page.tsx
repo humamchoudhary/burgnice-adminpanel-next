@@ -103,6 +103,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     setIsClient(true);
+    console.log(isAuthenticated());
     if (!isAuthenticated()) {
       router.replace("/login");
     }
