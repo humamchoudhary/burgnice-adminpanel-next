@@ -26,6 +26,7 @@ interface MenuEntry {
   image?: string;
   categories: Category[] | string[];
   isAvailable?: boolean;
+  isTopDeal: boolean;
 }
 
 interface Order {
@@ -265,6 +266,10 @@ export default function DashboardPage() {
       formData.append("description", currentMenuItem?.description || "");
       formData.append("price", (currentMenuItem?.price ?? 0).toString());
 
+      formData.append(
+        "isTopDeal",
+        (currentMenuItem?.isTopDeal || false).toString(),
+      );
       const categories = Array.isArray(currentMenuItem?.categories)
         ? currentMenuItem.categories
         : [];
@@ -1119,6 +1124,26 @@ export default function DashboardPage() {
                   )}
                 </div>
               </div>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="top-deal"
+                  checked={currentMenuItem?.isTopDeal || false}
+                  onChange={(e) =>
+                    setCurrentMenuItem({
+                      ...currentMenuItem,
+                      isTopDeal: e.target.checked,
+                    })
+                  }
+                  className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                />
+                <label
+                  htmlFor="top-deal"
+                  className="ml-2 text-sm text-gray-700"
+                >
+                  Mark as Top Deal
+                </label>
+              </div>{" "}
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => {
